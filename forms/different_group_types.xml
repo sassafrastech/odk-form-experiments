@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head>
+    <h:title>Different Group Types</h:title>
+    <model>
+      <instance>
+        <widgets id="widgets">
+          <q1/>
+          <q2/>
+          <q10/>
+          <q11/>
+          <q12/>
+          <q13/>
+          <grp-header/>
+          <repeat3 jr:template="">
+            <grp-header/>
+            <q14/>
+            <q15/>
+            <q16/>
+            <q17/>
+          </repeat3>
+          <q18/>
+          <q19/>
+          <q20/>
+          <q21/>
+          <q3/>
+          <repeat1 jr:template="">
+            <q4/>
+            <q5/>
+            <repeat2 jr:template="">
+              <q6/>
+              <q7/>
+              <q8/>
+              <q9/>
+            </repeat2>
+          </repeat1>
+        </widgets>
+      </instance>
+      <bind nodeset="/widgets/q1" type="string"/>
+      <bind nodeset="/widgets/q2" type="string"/>
+      <bind nodeset="/widgets/q10" type="string"/>
+      <bind nodeset="/widgets/q11" type="string"/>
+      <bind nodeset="/widgets/grp-header" type="string" readonly="true()"/>
+      <bind nodeset="/widgets/q12" type="string"/>
+      <bind nodeset="/widgets/q13" type="string"/>
+      <bind nodeset="/widgets/repeat3/grp-header" type="string" readonly="true()"/>
+      <bind nodeset="/widgets/repeat3/q14" type="string"/>
+      <bind nodeset="/widgets/repeat3/q15" type="string"/>
+      <bind nodeset="/widgets/repeat3/q16" type="string"/>
+      <bind nodeset="/widgets/repeat3/q17" type="string"/>
+      <bind nodeset="/widgets/q18" type="string"/>
+      <bind nodeset="/widgets/q19" type="string"/>
+      <bind nodeset="/widgets/q20" type="string"/>
+      <bind nodeset="/widgets/q21" type="string"/>
+      <bind nodeset="/widgets/q3" type="string"/>
+      <bind nodeset="/widgets/repeat1/q4" type="string"/>
+      <bind nodeset="/widgets/repeat1/q5" type="string"/>
+      <bind nodeset="/widgets/repeat1/repeat2/q6" type="string"/>
+      <bind nodeset="/widgets/repeat1/repeat2/q7" type="string"/>
+      <bind nodeset="/widgets/repeat1/repeat2/q8" type="string"/>
+      <bind nodeset="/widgets/repeat1/repeat2/q9" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <!-- For this group, the questions are on diff pages but header is on each screen -->
+    <group>
+      <label>Regular group</label>
+      <input ref="grp-header">
+        <hint>This is the group hint. It can be rather long.</hint>
+      </input>
+      <input ref="q1">
+        <label>q1</label>
+      </input>
+      <input ref="q2">
+        <label>q2</label>
+      </input>
+    </group>
+    <!-- For this group, the questions are all on one screen -->
+    <group appearance="field-list">
+      <label>One-screen group</label>
+      <input ref="grp-header">
+        <hint>This is the group hint. It can be rather long.</hint>
+      </input>
+      <input ref="q10">
+        <label>q10</label>
+      </input>
+      <input ref="q11">
+        <label>q11</label>
+      </input>
+    </group>
+
+    <group>
+      <label>Repeat group with multiple single page groups</label>
+      <repeat nodeset="/widgets/repeat3">
+        <group appearance="field-list">
+          <input ref="grp-header">
+            <hint>This is the group hint. It can be rather long.</hint>
+          </input>
+          <input ref="q14">
+            <label>q14</label>
+          </input>
+          <input ref="q15">
+            <label>q15</label>
+          </input>
+        </group>
+        <group appearance="field-list">
+          <input ref="grp-header">
+            <hint>This is the group hint. It can be rather long.</hint>
+          </input>
+          <input ref="q16">
+            <label>q16</label>
+          </input>
+          <input ref="q17">
+            <label>q17</label>
+          </input>
+        </group>
+      </repeat>
+    </group>
+
+    <group>
+      <label>Non-repeat group with multiple single page groups</label>
+      <group appearance="field-list">
+        <input ref="grp-header">
+          <hint>This is the group hint. It can be rather long.</hint>
+        </input>
+        <input ref="q18">
+          <label>q18</label>
+        </input>
+        <input ref="q19">
+          <label>q19</label>
+        </input>
+      </group>
+      <group appearance="field-list">
+        <input ref="grp-header">
+          <hint>This is the group hint. It can be rather long.</hint>
+        </input>
+        <input ref="q20">
+          <label>q20</label>
+        </input>
+        <input ref="q21">
+          <label>q21</label>
+        </input>
+      </group>
+    </group>
+
+    <!-- For this group, the header on each screen is "Weird group 1 > Weird group 2 > Weird group 3" -->
+    <group>
+      <label>Weird group 1</label>
+      <group>
+        <label>Weird group 2</label>
+        <group>
+          <label>Weird group 3</label>
+          <input ref="q3">
+            <label>q3</label>
+          </input>
+        </group>
+      </group>
+    </group>
+    <group>
+      <label>Repeat group</label>
+      <!-- For each instance, the header is "Repeat group (N)" -->
+      <repeat nodeset="/widgets/repeat1">
+        <input ref="q4">
+          <label>q4</label>
+        </input>
+        <input ref="q5">
+          <label>q5</label>
+        </input>
+        <group>
+          <label>Nested repeat group</label>
+          <!-- For each instance, the header is "Repeat group (N) > Nested repeat group (N)" -->
+          <repeat nodeset="/widgets/repeat1/repeat2">
+            <input ref="q6">
+              <label>q6</label>
+            </input>
+            <input ref="q7">
+              <label>q7</label>
+            </input>
+            <!-- For this group, the header is "Repeat group (N) > Nested repeat group (N) >
+              One-screen group inside repeat group" -->
+            <group appearance="field-list">
+              <label>One-screen group inside repeat group</label>
+              <input ref="q8">
+                <label>q8</label>
+              </input>
+              <input ref="q9">
+                <label>q9</label>
+              </input>
+            </group>
+          </repeat>
+        </group>
+      </repeat>
+    </group>
+  </h:body>
+</h:html>

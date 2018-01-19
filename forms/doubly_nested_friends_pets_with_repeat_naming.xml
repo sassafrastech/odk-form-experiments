@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>nested-repeats</h:title>
+    <model>
+      <instance>
+        <nested-repeats id="nested-repeats">
+          <friends jr:template="">
+            <friends_group>
+              <friend_count/>
+              <friend_name/>
+              <pets jr:template="">
+                <pets_group>
+                  <pet_count/>
+                  <pet_name/>
+                  <pet_type/>
+                </pets_group>
+              </pets>
+            </friends_group>
+          </friends>
+          <meta>
+            <instanceID/>
+          </meta>
+        </nested-repeats>
+      </instance>
+      <bind calculate="position(../..)" nodeset="/nested-repeats/friends/friends_group/friend_count" type="string"/>
+      <bind nodeset="/nested-repeats/friends/friends_group/friend_name" type="string"/>
+      <bind calculate="position(../..)" nodeset="/nested-repeats/friends/friends_group/pets/pets_group/pet_count" type="string"/>
+      <bind nodeset="/nested-repeats/friends/friends_group/pets/pets_group/pet_name" type="string"/>
+      <bind nodeset="/nested-repeats/friends/friends_group/pets/pets_group/pet_type" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/nested-repeats/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/nested-repeats/friends">
+      <label>Friends</label>
+      <repeat nodeset="/nested-repeats/friends">
+        <group ref="/nested-repeats/friends/friends_group">
+          <label><output value="/nested-repeats/friends/friends_group/friend_name" /></label>
+          <input ref="/nested-repeats/friends/friends_group/friend_name">
+            <label> What is friend #<output value=" /nested-repeats/friends/friends_group/friend_count "/>'s name? </label>
+          </input>
+          <group ref="/nested-repeats/friends/friends_group/pets">
+            <label>Pets</label>
+            <repeat nodeset="/nested-repeats/friends/friends_group/pets">
+              <group ref="/nested-repeats/friends/friends_group/pets/pets_group">
+                <label><output value="/nested-repeats/friends/friends_group/pets/pets_group/pet_name" /></label>
+                <input ref="/nested-repeats/friends/friends_group/pets/pets_group/pet_name">
+                  <label> What is the name of <output value=" /nested-repeats/friends/friends_group/friend_name "/>'s pet #<output value=" /nested-repeats/friends/friends_group/pets/pets_group/pet_count "/>? </label>
+                </input>
+                <input ref="/nested-repeats/friends/friends_group/pets/pets_group/pet_type">
+                  <label>What type of animal is it?</label>
+                </input>
+              </group>
+            </repeat>
+          </group>
+        </group>
+      </repeat>
+    </group>
+  </h:body>
+</h:html>

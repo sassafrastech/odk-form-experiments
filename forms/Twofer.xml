@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <h:head>
+      <h:title>Twofer</h:title>
+      <model>
+        <instance>
+  <data id="949" version="1">
+            <q9302 />
+            <q9303 />
+
+
+</data></instance>
+
+
+        <itext>
+            <translation lang="English">
+
+
+      <text id="q9302:label">
+        <value>Hats</value>
+      </text>
+        <text id="q9302:hint">
+          <value></value>
+        </text>
+      <text id="q9303:label">
+        <value>Pants</value>
+      </text>
+        <text id="q9303:hint">
+          <value></value>
+        </text>
+
+
+
+</translation>
+
+            <translation lang="Français">
+
+
+      <text id="q9302:label">
+        <value>Hats</value>
+      </text>
+        <text id="q9302:hint">
+          <value></value>
+        </text>
+      <text id="q9303:label">
+        <value>Pants</value>
+      </text>
+        <text id="q9303:hint">
+          <value></value>
+        </text>
+
+
+
+</translation>
+
+        </itext>
+                <bind nodeset="/data/q9302" type="string" />
+        <bind nodeset="/data/q9303" type="string" />
+
+        <bind nodeset="/data/my_phonenumber" type="string"
+           jr:preload="property"
+           jr:preloadParams="phonenumber"/>
+
+      </model>
+    </h:head>
+    <h:body>
+
+    <input ref="/data/my_phonenumber"/>
+    <label>Foo</label>
+    <input ref="/data/q9302"/>
+    <label ref="jr:itext('q9302:label')"/>
+
+    <hint ref="jr:itext('q9302:hint')"/>
+
+</input>
+
+
+    <input ref="/data/q9303">
+    <label ref="jr:itext('q9303:label')"/>
+
+    <hint ref="jr:itext('q9303:hint')"/>
+
+</input>
+
+
+    </h:body>
+  </h:html>

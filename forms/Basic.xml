@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+	<h:head>
+		<h:title>Basic</h:title>
+		<model>
+			<instance>
+				<!-- submitted data and defaults go here -->
+				<data id="basic">
+					<Cluster/>
+					<UID/>
+					<PaddedCluster/>
+					<HouseholdID/>
+					<HouseholdIDChunk/>
+					<Username/>
+					<People>
+						<Name/>
+						<Age/>
+						<IDChunk/>
+						<ID/>
+					</People>
+					<meta>
+						<instanceID/>
+						<instanceName/>
+					</meta>
+				</data>
+			</instance>
+			<!-- add properties to the questions, like data types, skip logic, and constraints -->
+			<bind nodeset="/data/Cluster" type="string" />
+			<bind nodeset="/data/UID" type="string" jr:preload="uid" />
+			<bind nodeset="/data/PaddedCluster" type="string" calculate="
+				if(string-length(/data/Cluster) = 1, concat('00', /data/Cluster),
+					if(string-length(/data/Cluster) = 2, concat('0', /data/Cluster),
+						/data/Cluster))"/>
+			<bind nodeset="/data/HouseholdIDChunk" type="string" calculate="once(substr(uuid(),0,4))"/>
+			<bind nodeset="/data/Username" type="string" jr:preload="property" jr:preloadParams="username"/>
+			<bind nodeset="/data/HouseholdID" type="string" readonly="true()"
+				calculate="concat(/data/Username, '-', /data/PaddedCluster, '-', /data/HouseholdIDChunk)"/>
+			<bind nodeset="/data/meta/instanceID" type="string" calculate="concat('uuid:', uuid())"/>
+			<bind nodeset="/data/meta/instanceName" type="string" calculate="concat('Bed Nets ', /data/HouseholdID)"/>
+			<bind nodeset="/data/People/IDChunk" type="string" calculate="once(substr(uuid(),0,4))"/>
+			<bind nodeset="/data/People/ID" type="string" readonly="true()"
+				calculate="concat(/data/HouseholdID, '-', ../IDChunk)"/>
+		</model>
+	</h:head>
+	<h:body>
+		<!-- define the questions that the user will fill out -->
+		<input ref="Cluster">
+			<label>Please enter cluster number</label>
+		</input>
+		<input ref="UID">
+			<label>UID</label>
+		</input>
+		<input ref="HouseholdID">
+			<label>The household ID is</label>
+		</input>
+		<group>
+		  <label>People</label>
+		  <repeat nodeset="/data/People">
+		    <input ref="Name">
+		      <label>Name</label>
+		    </input>
+		    <input ref="Age">
+		      <label>Age</label>
+		    </input>
+				<input ref="ID">
+					<label>The person ID is</label>
+				</input>
+		  </repeat>
+		</group>
+	</h:body>
+</h:html>

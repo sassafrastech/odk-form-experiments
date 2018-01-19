@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Generate InstanceName</h:title>
+    <model>
+      <instance>
+        <instance_name_example id="instanceName_example">
+          <imei/>
+          <start_time/>
+          <end_time/>
+          <survey_day/>
+          <deviceid/>
+          <sim_serial_number/>
+          <phone_number/>
+          <hhm_num/>
+          <lname/>
+          <fname/>
+          <mname/>
+          <meta>
+            <instanceID/>
+            <instanceName/>
+          </meta>
+        </instance_name_example>
+      </instance>
+      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/instance_name_example/imei" type="string"/>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/instance_name_example/start_time" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/instance_name_example/end_time" type="dateTime"/>
+      <bind jr:preload="date" jr:preloadParams="today" nodeset="/instance_name_example/survey_day" type="date"/>
+      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/instance_name_example/deviceid" type="string"/>
+      <bind jr:preload="property" jr:preloadParams="simserial" nodeset="/instance_name_example/sim_serial_number" type="string"/>
+      <bind jr:preload="property" jr:preloadParams="phonenumber" nodeset="/instance_name_example/phone_number" type="string"/>
+      <bind constraint=".&gt;=1" nodeset="/instance_name_example/hhm_num" required="true()" type="int"/>
+      <bind nodeset="/instance_name_example/lname" required="true()" type="string"/>
+      <bind nodeset="/instance_name_example/fname" required="true()" type="string"/>
+      <bind nodeset="/instance_name_example/mname" type="string"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/instance_name_example/meta/instanceID" readonly="true()" type="string"/>
+      <bind calculate="concat( /instance_name_example/lname , '-',  /instance_name_example/fname , '-', uuid())" nodeset="/instance_name_example/meta/instanceName" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/instance_name_example/hhm_num">
+      <label>How many household members are there?</label>
+    </input>
+    <input ref="/instance_name_example/lname">
+      <label>What is the last name?</label>
+    </input>
+    <input ref="/instance_name_example/fname">
+      <label>What is the first name?</label>
+    </input>
+    <input ref="/instance_name_example/mname">
+      <label>What is the middle name?</label>
+    </input>
+  </h:body>
+</h:html>

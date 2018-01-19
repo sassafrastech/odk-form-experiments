@@ -1,0 +1,42 @@
+<?xml version='1.0' ?>
+<widgets id="widgets">
+  <start>2017-05-23T13:19:54.007-04</start>
+  <end>2017-05-23T13:24:01.835-04</end>
+  <today>2017-05-23</today>
+  <deviceid>990004933289278</deviceid>
+  <subscriberid>311480157222863</subscriberid>
+  <simid>89148000001554972363</simid>
+  <phonenumber>7343150866</phonenumber><string/><int/>
+  <decimal>18.31</decimal>
+  <date>2017-06-23</date>
+  <select>a c</select>
+  <select1>8</select1>
+  <branch>n</branch><language/>
+  <regex>test@test.com</regex>
+  <repeat_a><item_string_a/>
+    <item_int>123456789</item_int>
+    <repeat_count>3</repeat_count>
+    <item_decimal>1.2345678901234E9</item_decimal>
+    <repeat_b>
+      <item_string_b>this 4 this is a really long string where you can put lots of information to prepare a user for anything you would like.</item_string_b>
+      <language_b>Child 1</language_b>
+    </repeat_b>
+    <repeat_b>
+      <item_string_b>2nd this is a really long string where you can put lots of information to prepare a user for anything you would like.</item_string_b>
+      <language_b>2nd</language_b>
+    </repeat_b>
+    <repeat_b>
+      <item_string_b>3rdthis is a really long string where you can put lots of information to prepare a user for anything you would like.</item_string_b>
+      <language_b>3rd</language_b>
+    </repeat_b>
+  </repeat_a>
+  <repeat_a><item_string_a/>
+    <item_int>22222222</item_int>
+    <repeat_count>3</repeat_count>
+    <item_decimal>1.2345678901234E9</item_decimal>
+    <repeat_b>
+      <item_string_b>this first in 2ndthis is a really long string where you can put lots of information to prepare a user for anything you would like.</item_string_b>
+      <language_b>1st in 2nd</language_b>
+    </repeat_b>
+  </repeat_a>
+  <calculate>less than or equal to five</calculate><trigger/><output/><geopoint/><barcode/><image/><audio/><video/></widgets>
