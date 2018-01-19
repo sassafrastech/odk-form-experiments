@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>Friends with Questiong/Group/Item Naming</h:title>
+    <model>
+      <instance>
+        <nested-repeats id="nested-repeats">
+          <color/>
+          <mood/>
+          <friends jr:template="">
+            <friends_group>
+              <friend_count/>
+              <friend_name/>
+              <friend_job/>
+            </friends_group>
+          </friends>
+          <meta>
+            <instanceID/>
+          </meta>
+        </nested-repeats>
+      </instance>
+      <bind type="string" nodeset="/nested-repeats/color"/>
+      <bind type="string" nodeset="/nested-repeats/mood"/>
+      <bind calculate="position(../..)" nodeset="/nested-repeats/friends/friends_group/friend_count" type="string"/>
+      <bind nodeset="/nested-repeats/friends/friends_group/friend_name" type="string"/>
+      <bind nodeset="/nested-repeats/friends/friends_group/friend_job" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/nested-repeats/color">
+      <label>Fave color?</label>
+    </input>
+    <input ref="/nested-repeats/mood">
+      <label>What mood does <output value="/nested-repeats/color" /> evoke in you?</label>
+    </input>
+    <group ref="/nested-repeats/friends">
+      <label>Friends With Mood <output value="/nested-repeats/mood" /></label>
+      <repeat nodeset="/nested-repeats/friends">
+        <group ref="/nested-repeats/friends/friends_group">
+          <label><output value="/nested-repeats/friends/friends_group/friend_name" /></label>
+          <input ref="/nested-repeats/friends/friends_group/friend_name">
+            <label> What is friend #<output value=" /nested-repeats/friends/friends_group/friend_count "/>'s name?</label>
+          </input>
+          <input ref="/nested-repeats/friends/friends_group/friend_job">
+            <label> What is their job?</label>
+          </input>
+        </group>
+      </repeat>
+    </group>
+  </h:body>
+</h:html>
