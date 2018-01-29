@@ -24,6 +24,42 @@
       <bind calculate="position(../..)" nodeset="/nested-repeats/friends/friends_group/friend_count" type="string"/>
       <bind nodeset="/nested-repeats/friends/friends_group/friend_name" type="string"/>
       <bind nodeset="/nested-repeats/friends/friends_group/friend_job" type="string"/>
+      <itext>
+        <translation lang="English">
+          <text id="friendsgroup:itemname">
+            <value>Big <output value="/nested-repeats/color"/>&#160;<output value="/nested-repeats/friends/friends_group/friend_name"/> the <output value="jr:itext(coalesce(/nested-repeats/friends/friends_group/friend_job, 'BLANK'))"/></value>
+          </text>
+          <text id="friendname:label">
+            <value>What is friend #<output value=" /nested-repeats/friends/friends_group/friend_count "/>'s name?</value>
+          </text>
+          <text id="job1">
+            <value>Painter</value>
+          </text>
+          <text id="job2">
+            <value>Plumber</value>
+          </text>
+          <text id="BLANK">
+            <value></value>
+          </text>
+        </translation>
+        <translation lang="Français">
+          <text id="friendsgroup:itemname">
+            <value>Grand <output value="/nested-repeats/color"/>&#160;<output value="/nested-repeats/friends/friends_group/friend_name"/> le <output value="jr:itext(coalesce(/nested-repeats/friends/friends_group/friend_job, 'BLANK'))"/></value>
+          </text>
+          <text id="friendname:label">
+            <value>Quelle est le nom d'ami #<output value=" /nested-repeats/friends/friends_group/friend_count "/>?</value>
+          </text>
+          <text id="job1">
+            <value>Peintre</value>
+          </text>
+          <text id="job2">
+            <value>Plombier</value>
+          </text>
+          <text id="BLANK">
+            <value></value>
+          </text>
+        </translation>
+      </itext>
     </model>
   </h:head>
   <h:body>
@@ -37,13 +73,21 @@
       <label>Friends With Mood <output value="/nested-repeats/mood" /></label>
       <repeat nodeset="/nested-repeats/friends">
         <group ref="/nested-repeats/friends/friends_group">
-          <label><output value="/nested-repeats/friends/friends_group/friend_name" /></label>
+          <label ref="jr:itext('friendsgroup:itemname')"/>
           <input ref="/nested-repeats/friends/friends_group/friend_name">
-            <label> What is friend #<output value=" /nested-repeats/friends/friends_group/friend_count "/>'s name?</label>
+            <label ref="jr:itext('friendname:label')"/>
           </input>
-          <input ref="/nested-repeats/friends/friends_group/friend_job">
-            <label> What is their job?</label>
-          </input>
+          <select1 ref="/nested-repeats/friends/friends_group/friend_job">
+            <label>What is their job?</label>
+            <item>
+              <label ref="jr:itext('job1')"/>
+              <value>job1</value>
+            </item>
+            <item>
+              <label ref="jr:itext('job2')"/>
+              <value>job2</value>
+            </item>
+          </select1>
         </group>
       </repeat>
     </group>
